@@ -87,7 +87,7 @@ exports.login = async (req,res) => {
                 }
             );
             
-            //user = user.toObject();
+            user = user.toObject();
             user.token = token;
             
         user.password = undefined; 
@@ -100,12 +100,18 @@ exports.login = async (req,res) => {
             httpOnly:true,
         }
 
-        res.cookie("token", token, options).status(200).json({
+        // res.cookie("token", token, options).status(200).json({
+        //     success:true,
+        //     token,
+        //     user,
+        //     message:"User Logged in successfully",
+        // });
+        res.status(200).json({
             success:true,
             token,
             user,
             message:"User Logged in successfully",
-        })
+        });
             
         } else {
             //password do not match
@@ -127,3 +133,4 @@ exports.login = async (req,res) => {
     }
     
 }
+
